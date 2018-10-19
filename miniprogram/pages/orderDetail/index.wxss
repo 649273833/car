@@ -1,0 +1,91 @@
+/* miniprogram/pages/orderDetail/index.wxss */
+button::after{
+  border:none;
+}
+.clear:after{
+  display: block;
+  content: '';
+  clear: both;
+}
+.time{
+  background-color:#ddd;
+  font-size: 16px;
+  text-align: center;
+  padding: 20px 0; 
+}
+.info-head{
+  padding: 6px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.info-head .action{
+  margin: 0 ;
+  padding: 0 10px;
+  line-height: 2;
+  border:1px solid #ddd;
+}
+.info-head .action image{
+  width: 16px;
+  height: 16px;
+}
+.order-info .progress{
+  width: 96%;
+  margin: 10px 2%;
+}
+.info-panel{
+  width: 86%;
+  margin: 10px auto; 
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px #ddd;
+}
+.info-panel .item{
+  margin: 10px 0;
+  font-size: 16px;
+  color: #666;
+}
+.info-panel .item .title{
+  width: 20%;
+  display: inline-block;
+}
+.info-panel .item .car-cloudPath{
+  float:right;
+  width: 80%;
+  vertical-align: text-top;
+}
+.info-panel .item .car-cloudPath .list{
+  float: left;
+  width: 28%;
+  height: 64px;
+  margin: 1%;
+  padding: 1.2%;
+  border:1px solid #ccc;
+  border-radius: 8px;
+  position: relative;
+}
+.info-panel .item .car-cloudPath .list image{
+  width: 100%;
+  height: 100%;
+}
+.info-panel .actions-panel{
+  margin: 20px;
+}
+.order-info .actions-panel button{
+  margin: 6px 0 6px 20%;
+  padding: 3px 10px;
+  line-height: 2;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  width: 70%;
+}
+.order-info .actions-panel .accept{
+  background-color:  #5bc0de;
+}
+.order-info .actions-panel .refused{
+  background-color:  #e4393c;
+}
+.order-info .actions-panel .finish{
+  background-color:  #1AAD16;
+}

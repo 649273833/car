@@ -1,0 +1,50 @@
+<!--miniprogram/pages/maintenance/index.wxml-->
+
+
+<view class='title'>欢迎使用名车名匠预约服务</view>
+<view class='sub-title'>请填写大致信息方便为您服务</view>
+<view class='rescue-info'>
+  <view class='item'>
+    <text>车牌：</text>
+    <input bindinput='onHandleRescue' value="{{carPlate}}" data-handle-type="carPlate" placeholder-class='input-p' placeholder='请输入车牌号码'></input>
+  </view>
+   <view class='item'>
+    <text>车型：</text>
+    <input  bindinput='onHandleRescue' value="{{carModel}}" data-handle-type="carModel" placeholder-class='input-p' placeholder='请输入大致车型'></input>
+  </view>
+     <view class='item'>
+    <text>手机：</text>
+    <input  bindinput='onHandleRescue' value="{{carPhone}}" data-handle-type="carPhone" placeholder-class='input-p' placeholder='请输入手机号码'></input>
+  </view>
+  <view class='item'>
+    <text>类型：</text>
+       <radio-group class='gender' bindchange="onHandleRadioChange">
+        <label>
+          保养：<radio value='1' checked/>
+        </label>
+        <label>
+          维修：<radio value='2' />
+        </label>
+      </radio-group>
+  </view>
+   <view class='item'>
+    <text>日期：</text>
+      <picker mode="date" value="{{carDate}}" start="2018-01-01"  bindchange="onHandleDateChange">
+            <view class="picker">
+             {{carDate ? carDate : '选择日期'}}
+            </view>
+      </picker>
+  </view>
+  <view class='item'>
+    <text>时间：</text>
+    <picker mode="time" value="{{carTime}}" start="09:00" end="21:00"   bindchange="onHandleTimeChange">
+            <view class="picker">
+              {{carTime ? carTime : '选择时间'}}
+            </view>
+      </picker>
+  </view>
+   <view class='item'> 
+    <button bindtap='onHandleSubmit' class='submit'>提交</button>
+  </view>
+</view>
+

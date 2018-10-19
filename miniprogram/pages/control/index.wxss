@@ -1,0 +1,68 @@
+/* miniprogram/pages/control/index.wxss */
+button::after{
+  border:none;
+}
+.clear:after{
+  display: block;
+  content: '';
+  clear: both;
+}
+.code{
+  padding: 15px;
+}
+.code .item .car-cloudPath{
+  float:right;
+  width: 80%;
+  vertical-align: text-top;
+}
+.code .item .car-cloudPath .list{
+  float: left;
+  width: 28%;
+  height: 64px;
+  margin: 1%;
+  padding: 1.2%;
+  border:1px solid #ccc;
+  border-radius: 8px;
+  position: relative;
+}
+.code .item .car-cloudPath .list image{
+  width: 100%;
+  height: 100%;
+}
+.code .item .car-cloudPath .list .close{
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: -6px;
+  top: -6px;
+}
+
+
+.concat-info {
+  padding: 5px;
+  margin: 15px ;
+}
+.concat-info .item{
+  display: flex;
+  justify-items: center;
+  margin: 15px 0;
+  padding: 15px 0;
+}
+.concat-info .item text{
+  width: 20%;
+  display: inline-block;
+}
+concat-info .item input,.rescue-info .item textarea{
+  border-bottom: 1px solid #1296db;
+  font-size: 16px;
+  width: 98%;
+}
+.concat-info .item .input-p{
+  font-size: 14px;
+  color: #1296db;
+}
+.concat-info .item .submit{
+  background-color: #1296db;
+  color: #fff;
+  padding: 0 40px;
+}

@@ -1,0 +1,27 @@
+<!--miniprogram/pages/index/index.wxml-->
+<!-- <view class='launch' hidden='{{launch}}'>
+  <image src='/images/wx_20181005091244.jpg'></image>
+</view> -->
+  <button class="kf_button" open-type="contact" session-from="weapp">
+     <image src='/images/icon/server.png'></image>
+  </button>
+  <!-- style='top:{{topa}}px;opacity:{{opacity}}' -->
+<view class='wx_code'>
+  <block wx:for="{{imagePath}}" wx:key="{{index}}">
+    <image data-img="{{item.imagePath}}" bindtap='onHandlePreview' src='{{item.imagePath}}'></image>
+  </block>
+</view>
+<!-- style='top:{{topb}}px;opacity:{{opacity}}' -->
+<view class='change clear'>
+  <button class='item m' data-url='/pages/maintenance/index'  bindtap='onHandleNavGo'>保养预约</button>
+  <button  class='item c'  open-type="contact" session-from="weapp">故障咨询</button>
+  <button class='item r' data-url='/pages/rescue/index' bindtap='onHandleNavGo'>紧急救助</button>
+  <button  class='item rd' open-type='getUserInfo' bindgetuserinfo='onHanleGetUserInfo'>我的记录</button>
+  <button class='item d' data-url='/pages/daily/index' bindtap='onHandleNavGo'>点滴记录</button>
+  <button class='item ct' hidden='{{!isAdmin}}' data-url='/pages/control/index' bindtap='onHandleNavGo'>管理中心</button>
+</view>
+<view class='contact_info'>
+  <view class='item' data-url="/pages/map/index" bindtap='onHandleNavGo'>地址：泸州市玉带龙庭(龙马潭区春雨路与陶然路交叉口)</view>
+  <view class='linear'></view>
+  <view class='item' bindtap='onHandleCallPhone'>电话：187 1576 4633</view>
+</view>

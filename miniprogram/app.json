@@ -1,0 +1,22 @@
+{
+  "cloud": true,
+  "pages": [
+    "pages/index/index",
+    "pages/user/index",
+    "pages/map/index",
+    "pages/rescue/index",
+    "pages/maintenance/index",
+    "pages/record/index",
+    "pages/orderDetail/index",
+    "pages/admin/index",
+    "pages/daily/index",
+    "pages/control",
+    "pages/control/index"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTextStyle": "black"
+  }
+}

@@ -1,0 +1,67 @@
+<!--miniprogram/pages/daily/index.wxml-->
+<swiper class='my-swiper'  circular="true">
+  <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+    <swiper-item class="my-swiper-item">
+     <view class='item-box' bindtap='onHandlePreview'>
+        <image src="{{item}}" class="slide-image" width="355" height="150"/>
+        <view class='text-info'>
+            <view class='title text-overflow'>今天修了辆奔驰</view>
+            <view class='sub-title text-overflow'>这尼玛傻逼车主把奔驰开到粪坑里面掏粪了</view>
+        </view>
+     </view>
+    </swiper-item>
+  </block>
+</swiper>
+<view class='history-list'>
+    <view class='h-items'  bindtap='onHandlePreview'>
+      <view class='item-content'>
+          <image src='https://682d-h-be98d5-1251967570.tcb.qcloud.la/itembg/5ad9e5a80001732c05400300-360-202.jpg?sign=5bf71aa491a9f161c7cd26df23d439ab&t=1538889076'></image>
+        <view class='sub-title'>傻逼车主</view>
+        <view class='type'>
+          <image src='/images/icon/location.png'></image>
+          <text class='type-title'>汽车保养</text>
+        </view>
+      </view>
+    </view>
+    <view class='h-items' bindtap='onHandlePreview'>
+      <view class='item-content'>
+          <image src='https://682d-h-be98d5-1251967570.tcb.qcloud.la/itembg/5ad9e5a80001732c05400300-360-202.jpg?sign=5bf71aa491a9f161c7cd26df23d439ab&t=1538889076'></image>
+        <view class='sub-title'>傻逼车主这尼玛傻逼车主把奔驰开到粪坑里面掏粪了这尼玛傻逼车主把奔驰开到粪坑里面掏粪了</view>
+        <view class='type'>
+          <image src='/images/icon/location.png'></image>
+          <text class='type-title'>汽车保养</text>
+        </view>
+      </view>
+    </view>
+    <view class='h-items' bindtap='onHandlePreview'>
+      <view class='item-content'>
+          <image src='https://682d-h-be98d5-1251967570.tcb.qcloud.la/itembg/5ad9e5a80001732c05400300-360-202.jpg?sign=5bf71aa491a9f161c7cd26df23d439ab&t=1538889076'></image>
+        <view class='sub-title'>傻逼车主这尼玛傻逼车主把奔驰开到粪坑里面掏粪了</view>
+        <view class='type'>
+          <image src='/images/icon/location.png'></image>
+          <text class='type-title'>汽车保养</text>
+        </view>
+      </view>
+    </view>
+    <view class='h-items' bindtap='onHandlePreview'>
+      <view class='item-content'>
+          <image src='https://682d-h-be98d5-1251967570.tcb.qcloud.la/itembg/5ad9e5a80001732c05400300-360-202.jpg?sign=5bf71aa491a9f161c7cd26df23d439ab&t=1538889076'></image>
+        <view class='sub-title'>傻逼车主</view>
+        <view class='type'>
+          <image src='/images/icon/location.png'></image>
+          <text class='type-title'>汽车保养</text>
+        </view>
+      </view>
+    </view>
+    <view class='h-items' bindtap='onHandlePreview'>
+      <view class='item-content'>
+          <image src='https://682d-h-be98d5-1251967570.tcb.qcloud.la/itembg/5ad9e5a80001732c05400300-360-202.jpg?sign=5bf71aa491a9f161c7cd26df23d439ab&t=1538889076'></image>
+        <view class='sub-title'>傻逼车主这尼玛傻逼车主把奔驰开到粪坑里面掏粪了这尼玛傻逼车主把奔驰开到粪坑里面掏粪了这尼玛傻逼车主把奔驰开到粪坑里面掏粪了这尼玛傻逼车主把奔驰开到粪坑里面掏粪了</view>
+        <view class='type'>
+          <image src='/images/icon/location.png'></image>
+          <text class='type-title'>汽车保养</text>
+        </view>
+      </view>
+    </view>
+</view>
+

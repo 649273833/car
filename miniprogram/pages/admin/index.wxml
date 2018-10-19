@@ -1,0 +1,26 @@
+<!--miniprogram/pages/record/index.wxml-->
+  <scroll-view class='list' scroll-y style="height: 100vh;" enable-back-to-top='true' scroll-with-animation='true'>
+    
+      <view class='item' wx:for="{{list}}" wx:key="{{item._id}}" data-oid='{{item._id}}' bindtap='onHandleToDetail'>
+        <view class='head-panel'>
+          <view class='type'>{{item.carType == '0' ? '救援' : item.carType == '1' ? '保养' : '维修'}}</view>
+          <view class='actions'>
+           
+                <button class="{{item.actions == '-1' ? 'btn-yy c-gray' : 'btn-yy'}}">{{item.actions == '0' ? '正在预约' : item.actions == '1' ? '预约成功' : item.actions == '2' ? '订单完成' : '已取消' }}</button>
+          </view>
+        </view>
+        <view class='order-info'>
+          <view class='time'>
+            <image src='/images/icon/Time _ Clock.png'></image>
+            <text>{{item.addTime }}</text>
+          </view>
+          <view class='type'>
+            <text class='icon-black'></text>
+            <text>{{item.carType <= '0' ? '汽车救援服务' : '汽车保养与维修服务'}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='data-more' bindtap='onHandleDataMore' data-more="1">
+        {{isMore ? '查看更多数据' : '没有更多了'}}
+      </view>
+  </scroll-view>

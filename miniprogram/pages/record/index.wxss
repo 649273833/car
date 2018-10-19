@@ -1,0 +1,76 @@
+/* miniprogram/pages/record/index.wxss */
+button::after{
+  border:none;
+}
+.list{
+  background-color: #ddd;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #666;
+}
+.list .item{
+  margin: 5px auto;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 96%;
+  background-color: #fff;
+}
+.list .item .head-panel{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.list .item .head-panel .type{
+  color: #333;
+  font-size: 16px;
+}
+.list .item .head-panel .actions{
+  display: flex;
+  align-items: center;
+}
+.list .item .head-panel .actions button{
+  font-size: 14px;
+  padding:0 4px;
+  line-height: 1.8;
+  margin-left: 6px;
+}
+.list .item .head-panel .actions .btn-yy{
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+.list .item .head-panel .actions .btn-yy.c-gray{
+  background-color: #ccc;
+}
+.list .item .head-panel .actions .btn-cancel{
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.list .item .order-info{
+  margin: 10px auto 0;
+}
+.list .item .order-info .time{
+  display: flex;
+  align-items: center;
+}
+.list .item .order-info .time image{
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+}
+.list .item .order-info .type .icon-black{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  background-color: #f1bc5d;
+  border-radius: 50%;
+}
+.data-more{
+  margin: 20px auto;
+  font-size: 18px;
+  color:  #5bc0de;
+  text-align: center;
+}

@@ -1,0 +1,53 @@
+<!--miniprogram/pages/orderDetail/index.wxml-->
+<view class='time'>于{{data && data.addTime}}预约</view>
+<view class='order-info'>
+  <view class='info-head'>
+    <text class='title'>{{data && data.carType == '0' ? '救援' : data.carType == '1' ? '保养' : '维修'}}</text>
+    <button class='action' bindtap='onHandleCallPhone' hidden="{{data && data.actions == '-1' ? true : data.actions == '2' ? true : isAdmin ? true : false}}">
+      <image src='/images/icon/callphone.png'></image>
+      催单
+    </button>
+    <view hidden="{{data && data.actions == '-1' ? false : data.actions == '2' ? false : true}}" >
+     {{data && data.actions == '-1' ? '已取消' : data.actions == '2' ? '已完成' : ''}}</view>
+    </view>
+  <progress class='progress' percent="{{data && data.actions == '-1' ? 0 : data.actions == '0' ? 0 : data.actions == '1' ? 50 : data.actions == '2' ? 100 : 0}}" show-info />
+  <view class='info-panel'>
+    <view class='item'>
+      <text class='title'>车牌：</text>
+      <text class='car-plate'>{{data && data.carPlate}}</text>
+    </view>
+    <view class='item'>
+      <text class='title'>车型：</text>
+      <text class='car-plate'>{{data && data.carModel}}</text>
+    </view>
+    <view class='item' hidden="{{!data.carDate}}">
+      <text class='title'>预约：</text>
+      <text class='car-date'>{{data && data.carDate}} {{data && data.carTime}}</text>
+    </view>
+    <view class='item'>
+      <text class='title'>手机：</text>
+      <text class='car-phone'>{{data && data.carPhone}}</text>
+    </view>
+    <view class='item' hidden="{{!data.carAddress}}">
+      <text class='title' >地址：</text>
+      <text class='car-address'>{{data && data.carAddress}}</text>
+    </view>
+    <view class='item' hidden="{{!data.carDetails}}">
+      <text class='title'>详情：</text>
+      <text class='car-dtails'>{{data && data.carDetails}}</text>
+    </view>
+    <view class='item clear' hidden="{{!data.imagePath}}" >
+      <text class='title'>照片：</text>
+      <view class='car-cloudPath clear' >
+        <view class='list'  wx:for="{{data && data.imagePath}}" wx:key="{{item}}">
+          <image data-img="{{item}}" bindtap='onHandlePreview' src="{{item}}"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='actions-panel' hidden="{{isAdmin ? false : true}}">
+    <button hidden="{{data && data.actions == '0' ? false : true}}" class='accept' bindtap='onHandleOrderAccept'>接单</button>
+    <button hidden="{{data && data.actions == '0' ? false : data.actions == '1' ? false : true}}" class='refused' bindtap='onHandleOrderRefused'>拒绝</button>
+    <button  hidden="{{data && data.actions == '1' ? false : true}}" class='finish' bindtap='onHandleOrderFinish'>完成</button>
+  </view>
+</view>

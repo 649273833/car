@@ -1,0 +1,68 @@
+/* miniprogram/pages/maintenance/index.wxss */
+.clear:after{
+  display: block;
+  content: '';
+  clear: both;
+}
+button::after{
+  border:none;
+}
+input{
+  outline:none;
+  border:none;
+  list-style: none;
+}
+.title{
+  text-align: center;
+  font-size: 24px;
+  margin: 15px auto 30px;
+}
+.sub-title{
+  text-align: center;
+}
+.rescue-info {
+  padding: 5px;
+  margin: 15px ;
+}
+.rescue-info .item{
+  display: flex;
+  justify-items: center;
+  margin: 15px 0;
+  padding: 15px 0;
+}
+.rescue-info .item text{
+  width: 20%;
+}
+.rescue-info .item .up-img{
+  
+  height: 64px;
+  border: 1px solid #ddd;
+  text-align: center;
+  line-height: 64px;
+}
+
+.rescue-info .item .up-img image,.rescue-info .item .up-img .list-item{
+  float: left;
+  width: 64px;
+  height: 100%;
+  position: relative;
+}
+.rescue-info .item .up-img .list-item .close{
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: -6px;
+  top: -6px;
+}
+.rescue-info .item input,.rescue-info .item textarea{
+  border-bottom: 1px solid #1296db;
+}
+.rescue-info .item .input-p{
+  font-size: 14px;
+  color: #1296db;
+}
+.rescue-info .item .submit{
+  background-color: #1296db;
+  color: #fff;
+  padding: 0 40px;
+}

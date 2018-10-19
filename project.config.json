@@ -1,0 +1,71 @@
+{
+	"miniprogramRoot": "miniprogram/",
+	"cloudfunctionRoot": "cloudfunctions/",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"appid": "wx446269490f9b0020",
+	"projectname": "car",
+	"libVersion": "2.3.0",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 5,
+			"list": [
+				{
+					"id": -1,
+					"name": "db guide",
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "rescue",
+					"pathName": "pages/rescue/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "record",
+					"pathName": "pages/record/index",
+					"query": ""
+				},
+				{
+					"id": 3,
+					"name": "detail",
+					"pathName": "pages/orderDetail/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "daily",
+					"pathName": "pages/daily/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "control",
+					"pathName": "pages/control/index"
+				}
+			]
+		}
+	}
+}
