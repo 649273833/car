@@ -36,11 +36,11 @@
       <text class='title'>详情：</text>
       <text class='car-dtails'>{{data && data.carDetails}}</text>
     </view>
-    <view class='item clear' hidden="{{!data.imagePath}}" >
+    <view class='item clear' hidden="{{!data.fileList}}" >
       <text class='title'>照片：</text>
       <view class='car-cloudPath clear' >
-        <view class='list'  wx:for="{{data && data.imagePath}}" wx:key="{{item}}">
-          <image data-img="{{item}}" bindtap='onHandlePreview' src="{{item}}"></image>
+        <view class='list'  wx:for="{{data && data.fileList}}" wx:key="{{item.fileID}}">
+          <image data-img="{{item.tempFileURL}}" bindtap='onHandlePreview' src="{{item.tempFileURL}}"></image>
         </view>
       </view>
     </view>

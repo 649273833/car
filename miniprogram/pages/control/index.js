@@ -1,4 +1,11 @@
 // miniprogram/pages/control/index.js
+// 引入SDK核心类
+var QQMapWX = require('../qqmap-wx-jssdk.js');
+
+// 实例化API核心类
+var controlMap = new QQMapWX({
+  key: 'ZG2BZ-XSY33-FOC3E-YIYEH-REYY3-3YFWE' // 必填
+});
 const app = getApp()
 const db = wx.cloud.database()
 Page({
@@ -8,7 +15,10 @@ Page({
    */
   data: {
     imagePath:[],
-    
+    addressName:'',
+    addressInfo:[],
+    phone:'',
+    _id:''
   },
 
   /**
@@ -16,13 +26,45 @@ Page({
    */
   onLoad: function (options) {
     this.onHandleGetCode()
+    this.onHandleGetConcatInfo()
   },
   onHandleGetCode:function(){
     let _that = this;
     db.collection('codeimg')
     .get()
     .then((res)=>{
-      _that.setData({ imagePath:res.data})
+      let fileID = [],_id=[];
+      for(let i=0;i<res.data.length;i++){
+        fileID.push(res.data[i].fileID)
+        _id.push({ _id: res.data[i]._id})
+      }
+      wx.cloud.getTempFileURL({
+        fileList: fileID,
+        success: res => {
+          let fileList = res.fileList
+          for(let i=0;i<fileList.length;i++){
+            fileList[i]._id=_id[i]._id
+          }     
+          _that.setData({ imagePath: fileList })
+        },
+        fail: err => {
+
+        }
+      })
+    })
+  },
+  onHandleGetConcatInfo:function(){
+    let _that = this;
+    db.collection('concatinfo').get({
+      success:res=>{
+        let data = res.data[0]
+        _that.setData({
+          addressName: data.addressName,
+          addressInfo: data.addressInfo,
+          phone: data.phone,
+          _id:data._id
+        })
+      }
     })
   },
   //获取一个n位的随机数
@@ -83,13 +125,14 @@ Page({
                 },
               })
               .then((res)=>{
-                let _id = res._id;
-                let _openid = 'oQHke0QGDoAtpzxO0JweKbDgeFX8';
-                let imagePath = filePath[i];
-                let data = [{ _id, _openid, imagePath, fileID}]
-                _that.setData({
-                  imagePath: _that.data.imagePath.concat(data),
-                })
+                // let _id = res._id;
+                // let _openid = 'oQHke0QGDoAtpzxO0JweKbDgeFX8';
+                // let imagePath = filePath[i];
+                // let data = [{ _id, _openid, imagePath, fileID}]
+                // _that.setData({
+                //   imagePath: _that.data.imagePath.concat(data),
+                // })
+                _that.onHandleGetCode()
               })
               wx.hideLoading()
             },
@@ -117,7 +160,7 @@ Page({
     let path = [];
     let { imagePath} = _that.data;
     for(let i=0;i<imagePath.length;i++){
-      path.push(imagePath[i].imagePath)
+      path.push(imagePath[i].tempFileURL)
     } 
     wx.previewImage({
       current: e.currentTarget.dataset.img,
@@ -126,24 +169,30 @@ Page({
   },
   onHandleClose: function (e) {
     let _that = this;
-    let index = e.currentTarget.dataset.img
     let fileID = e.currentTarget.dataset.fileid
+    let _id = e.currentTarget.dataset.img
+    console.log(_id)
     let { imagePath } = this.data
     wx.showModal({
       title: '删除二维码',
       content: '确定删除吗？',
       success:res=>{
         if(res.confirm){
-          db.collection('codeimg').doc(index).remove({
+          db.collection('codeimg').doc(_id).remove({
             success: function (res) {
+              console.log(res)
               wx.cloud.deleteFile({
                 fileList: [fileID]
               }).then(res => {
-                console.log(res.fileList)
-                imagePath.splice(index, 1)
-                _that.setData({ imagePath })
+                imagePath.splice(fileID, 1)
+                _that.onHandleGetCode()
               }).catch(error => {
                 console.log('err')
+              })
+            },
+            fail:()=>{
+              wx.showToast({
+                title: '删除失败，请重试！',
               })
             }
           })
@@ -153,8 +202,83 @@ Page({
       }
     })
   },
-
-
+  onHandleConcatInfo:function(e){
+    let val = e.detail.value;
+    let type = e.currentTarget.dataset.handleType;
+    this.setData({ [type]: val })
+  },
+  isMobile:function(val){
+    let reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
+    return reg.test(val)
+  },
+  onHandleSubmitConcatInfo:function(){
+    let _that = this;
+    let {addressName,phone,_id} = _that.data;
+    if (!_that.isMobile(phone)){
+      wx.showToast({
+        title: '这不是个手机号码！',
+      })
+    }else{
+      controlMap.geocoder({
+        address: addressName,
+        success: function (res) {
+          console.log(res.result)
+          let result = res.result
+          _that.setData({ addressInfo: res.result })
+          db.collection('concatinfo').doc(_id).update({
+            data: {
+              addressName,
+              addressInfo: result,
+              phone
+            },
+            success: res => {
+              if (res.stats.updated == 1) {
+                wx.showToast({
+                  title: '更新成功！',
+                })
+              } else if (res.stats.updated == 0) {
+                wx.showToast({
+                  title: '和上次没啥变化！',
+                })
+              }
+            },
+            fail: res => {
+              wx.showToast({
+                title: '错误，请重试！',
+              })
+            }
+          })
+        },
+        fail: function (res) {
+          wx.showModal({
+            title: '错误',
+            content: res.message,
+          })
+        },
+      });
+    }
+  },
+  onHandleGetLocation: function () {
+    let _that = this;
+    wx.getLocation({
+      type: 'gcj02',
+      success: function (res) {
+        // 调用接口
+        controlMap.reverseGeocoder({
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude
+          },
+          success: function (res) {
+            _that.setData({ addressName: res.result.address })
+          },
+          fail: function (res) {
+            console.log(res);
+          },
+        });
+      },
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

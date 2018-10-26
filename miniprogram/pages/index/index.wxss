@@ -7,6 +7,7 @@
 page{
     /* background: linear-gradient(#ff8181 0%, #ffff81 20%, #81ff81 40%, #81ffff 60%, #8181ff 80%, #ff81ff 100%);  */
     background-color: #fff;
+border-bottom:1px solid transparent;
 
 }
 .launch{
@@ -118,7 +119,6 @@ button::after{
   border-radius: 14px;
 }
 .contact_info .item{
-
   color: #fff;
   padding: 10px;
 }

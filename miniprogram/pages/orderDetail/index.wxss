@@ -8,7 +8,7 @@ button::after{
   clear: both;
 }
 .time{
-  background-color:#ddd;
+  background-color:#e5e5e5;
   font-size: 16px;
   text-align: center;
   padding: 20px 0; 

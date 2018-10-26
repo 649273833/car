@@ -48,9 +48,12 @@ button::after{
   margin: 15px 0;
   padding: 15px 0;
 }
-.concat-info .item text{
-  width: 20%;
+
+.concat-info .item .address{
+  width: 32px;
+  height: 32px;
   display: inline-block;
+  margin-left: 20px;
 }
 concat-info .item input,.rescue-info .item textarea{
   border-bottom: 1px solid #1296db;

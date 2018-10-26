@@ -10,7 +10,6 @@
     "pages/orderDetail/index",
     "pages/admin/index",
     "pages/daily/index",
-    "pages/control",
     "pages/control/index"
   ],
   "window": {

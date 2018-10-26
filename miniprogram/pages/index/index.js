@@ -9,6 +9,9 @@ Page({
   data: {
     imagePath:[],
     isAdmin:false,
+    addressName: '',
+    addressInfo: [],
+    phone: '',
   },
 
   /**
@@ -17,14 +20,50 @@ Page({
   onLoad: function (options) {
     this.onHandleLaunch()
     this.onHandleGetCode()
+    this.onHandleGetConcatInfo()
   },
   onHandleGetCode: function () {
     let _that = this;
     db.collection('codeimg')
       .get()
       .then((res) => {
-        _that.setData({ imagePath: res.data })
+        let fileID = [], _id = [];
+        for (let i = 0; i < res.data.length; i++) {
+          fileID.push(res.data[i].fileID)
+          _id.push({ _id: res.data[i]._id })
+        }
+        wx.cloud.getTempFileURL({
+          fileList: fileID,
+          success: res => {
+            let fileList = res.fileList
+            for (let i = 0; i < fileList.length; i++) {
+              fileList[i]._id = _id[i]._id
+            }
+            _that.setData({ imagePath: fileList })
+          },
+          fail: err => {
+
+          }
+        })
       })
+  },
+  onHandleGetConcatInfo: function () {
+    let _that = this;
+    db.collection('concatinfo').get({
+      success: res => {
+        let data = res.data[0]
+        wx.setStorage({
+          key: 'address',
+          data,
+        })
+        _that.setData({
+          addressName: data.addressName,
+          addressInfo: data.addressInfo,
+          phone: data.phone,
+          _id: data._id
+        })
+      }
+    })
   },
   onHandleLaunch:function(){
     let that = this;
@@ -109,8 +148,9 @@ Page({
     })
   },
   onHandleCallPhone:function(){
+    let _that = this
     wx.makePhoneCall({
-      phoneNumber: '18715764633' 
+      phoneNumber: _that.data.phone
     })
   },
   onHandlePreview: function (e) {
@@ -118,7 +158,7 @@ Page({
     let path = [];
     let { imagePath } = _that.data;
     for (let i = 0; i < imagePath.length; i++) {
-      path.push(imagePath[i].imagePath)
+      path.push(imagePath[i].tempFileURL)
     }
     wx.previewImage({
       current: e.currentTarget.dataset.img,
@@ -136,7 +176,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.onHandleGetCode()
+    this.onHandleGetConcatInfo()
   },
 
   /**

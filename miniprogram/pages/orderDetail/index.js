@@ -19,6 +19,7 @@ Page({
     this.onHandleGetDataFormID(options)
     this.onHandleGetAdmin()
   },
+
   onHandleGetDataFormID: function (options){
     let _that = this;
     db.collection('carOrder').doc(options.id).get({
@@ -30,7 +31,19 @@ Page({
         let timee = res.data.addTime.getMinutes() > 9 ? res.data.addTime.getMinutes() : '0' + res.data.addTime.getMinutes()
         let addTime = timea + '年' + timeb + '月' + timec + ' ' + timed + ':' + timee
         res.data.addTime = addTime
-        _that.setData({data:res.data})
+        console.log(res.data)
+        let data = res.data
+        wx.cloud.getTempFileURL({
+          fileList: res.data.fileList,
+          success: res => {
+          
+            data.fileList = res.fileList
+            _that.setData({ data })
+          },
+          fail: err => {
+            console.log('err')
+          }
+        })
       }
     })
   },
@@ -41,9 +54,13 @@ Page({
   },
   onHandlePreview: function (e) {
     let _that = this;
+    let tempFileURLList = []
+    for (let i = 0; i < _that.data.data.fileList.length;i++){
+      tempFileURLList.push(_that.data.data.fileList[i].tempFileURL)
+    }
     wx.previewImage({
       current: e.currentTarget.dataset.img,
-      urls: _that.data.data.imagePath
+        urls: tempFileURLList
     })
   },
   onHandleGetAdmin:function(){

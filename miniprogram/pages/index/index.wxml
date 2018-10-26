@@ -8,7 +8,7 @@
   <!-- style='top:{{topa}}px;opacity:{{opacity}}' -->
 <view class='wx_code'>
   <block wx:for="{{imagePath}}" wx:key="{{index}}">
-    <image data-img="{{item.imagePath}}" bindtap='onHandlePreview' src='{{item.imagePath}}'></image>
+    <image data-img="{{item.tempFileURL}}" bindtap='onHandlePreview' src='{{item.tempFileURL}}'></image>
   </block>
 </view>
 <!-- style='top:{{topb}}px;opacity:{{opacity}}' -->
@@ -21,7 +21,7 @@
   <button class='item ct' hidden='{{!isAdmin}}' data-url='/pages/control/index' bindtap='onHandleNavGo'>管理中心</button>
 </view>
 <view class='contact_info'>
-  <view class='item' data-url="/pages/map/index" bindtap='onHandleNavGo'>地址：泸州市玉带龙庭(龙马潭区春雨路与陶然路交叉口)</view>
+  <view class='item' data-url="/pages/map/index" bindtap='onHandleNavGo'>地址：{{addressName}}</view>
   <view class='linear'></view>
-  <view class='item' bindtap='onHandleCallPhone'>电话：187 1576 4633</view>
+  <view class='item' bindtap='onHandleCallPhone'>电话：{{phone}}</view>
 </view>

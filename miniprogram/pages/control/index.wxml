@@ -4,7 +4,7 @@
       <text class='title'>二维码：</text>
       <view class='car-cloudPath clear' >
         <view class='list'  wx:for="{{imagePath && imagePath}}" wx:key="{{item._id}}">
-          <image data-img="{{item.imagePath}}" bindtap='onHandlePreview' src="{{item.imagePath}}"></image>
+          <image data-img="{{item.tempFileURL}}" bindtap='onHandlePreview' src="{{item.tempFileURL}}"></image>
           <image bindtap='onHandleClose' data-img="{{item._id}}" data-fileid="{{item.fileID}}" class='close' src='/images/icon/close.png'></image>
         </view>
         <view class='list' hidden="{{imagePath.length > 9 ? true : false}}" >
@@ -16,13 +16,14 @@
 <view class='concat-info'>
     <view class='item'>
       <text>地址：</text>
-      <input bindinput='onHandleConcatInfo' value="{{address}}" data-handle-type="address" placeholder-class='input-p' placeholder='请输入地址'></input>
+      <input bindinput='onHandleConcatInfo' value="{{addressName}}" data-handle-type="addressName" placeholder-class='input-p' placeholder='请输入地址'></input>
+      <image class='address' src='/images/icon/address.png' bindtap='onHandleGetLocation'></image>
     </view>
     <view class='item'>
       <text>电话：</text>
       <input bindinput='onHandleConcatInfo' value="{{phone}}" data-handle-type="phone" placeholder-class='input-p' placeholder='请输入电话号码'></input>
     </view>
     <view class='item'> 
-      <button bindtap='onHandleSubmit' class='submit'>提交联系信息</button>
+      <button bindtap='onHandleSubmitConcatInfo' class='submit'>提交联系信息</button>
     </view>
 </view>

@@ -1,9 +1,9 @@
 // miniprogram/pages/index/rescue/index.js
 // 引入SDK核心类
-var QQMapWX = require('./qqmap-wx-jssdk.js');
+var QQMapWX = require('../qqmap-wx-jssdk.js');
 
 // 实例化API核心类
-var demo = new QQMapWX({
+var rescueMap = new QQMapWX({
   key: 'ZG2BZ-XSY33-FOC3E-YIYEH-REYY3-3YFWE' // 必填
 });
 
@@ -33,7 +33,7 @@ Page({
       type: 'gcj02',
       success: function(res) {
         // 调用接口
-        demo.reverseGeocoder({
+        rescueMap.reverseGeocoder({
           location: {
             latitude: res.latitude,
             longitude: res.longitude
@@ -84,7 +84,6 @@ Page({
       count: 9,
       sourceType: ['album', 'camera'],
       success: function (res) {
-        console.log(res)
         wx.showLoading({
           title: '上传中',
         })
@@ -92,7 +91,6 @@ Page({
         for (let i = 0; i < filePath.length; i++) {
           // 上传图片
           const cloudPath = _that.getNowFormatDate() + _that.RndNum(5) + filePath[i].match(/\.[^.]+?$/)[0]
-          console.log(i, filePath[i], cloudPath)
           wx.cloud.uploadFile({
             cloudPath,
             filePath: filePath[i],
@@ -157,6 +155,10 @@ Page({
   },
   onHandleSubmit: function () {
     let { carPlate, carModel, carDetails, carAddress, carPhone, imagePath} = this.data
+    let fileList = [];
+    for(let i=0;i<imagePath.length;i++){
+      fileList.push(imagePath[i].fileID)
+    }
     db.collection('carOrder').add({
       data:{
         carPlate,
@@ -166,12 +168,11 @@ Page({
         actions:0,
         carDetails,
         carAddress,
-        imagePath,
+        fileList,
         addTime: db.serverDate()
       }
     })
     .then((res)=>{
-      console.log(res)
       if (res.errMsg === "collection.add:ok"){
         wx.showModal({
           title: '提交成功',
